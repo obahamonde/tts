@@ -6,4 +6,4 @@ ENV PYTHONUNBUFFERED=1
 RUN apt-get update && apt-get install -y ffmpeg
 EXPOSE 8080
 RUN pip install --no-cache-dir -r requirements.txt
-CMD ["make"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]

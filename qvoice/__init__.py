@@ -1,15 +1,16 @@
 import io
 from typing import Literal, TypeAlias
+
 import aiofiles
 import numpy as np  # type: ignore
 import pytube  # pylint: disable=E0401  # type: ignore
 import scipy.io.wavfile as wavfile  # type: ignore
-from cachetools import LRUCache, cached  # type: ignore # pylint: disable=import-error
+from cachetools import (  # type: ignore # pylint: disable=import-error
+    LRUCache, cached)
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydub import AudioSegment  # type: ignore # pylint: disable=E0401
-
 # from pydub import AudioSegment  # type: ignore
 from TTS.api import TTS  # type: ignore
 

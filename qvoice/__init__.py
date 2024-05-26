@@ -1,6 +1,5 @@
 import io
 from typing import Literal, TypeAlias
-import torch
 import aiofiles
 import pytube  # pylint: disable=E0401  # type: ignore
 from cachetools import LRUCache, cached  # type: ignore # pylint: disable=import-error
@@ -14,7 +13,7 @@ from TTS.api import TTS  # type: ignore
 cache = LRUCache(maxsize=1)  # type: ignore
 Lang: TypeAlias = Literal["en", "es"]
 Gender: TypeAlias = Literal["female", "male"]
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"  # type: ignore
+DEVICE = "cpu"
 
 @cached(cache)  # type: ignore
 def load_model():
@@ -22,7 +21,6 @@ def load_model():
 
 
 tts = load_model()
-
 
 def download_audio(url: str) -> io.BytesIO:
     yt = pytube.YouTube(url)

@@ -14,7 +14,6 @@ from TTS.api import TTS  # type: ignore
 cache = LRUCache(maxsize=1)  # type: ignore
 Lang: TypeAlias = Literal["en", "es"]
 Gender: TypeAlias = Literal["female", "male"]
-DEVICE = "cpu"
 
 R = TypeVar("R")
 P = ParamSpec("P")
@@ -29,7 +28,7 @@ def asyncify(func:Callable[P, R]) -> Callable[P, Awaitable[R]]:
 
 @cached(cache)  # type: ignore
 def load_model():
-	return TTS("tts_models/multilingual/multi-dataset/xtts_v2").to(DEVICE)  # type: ignore
+	return TTS("tts_models/multilingual/multi-dataset/xtts_v2")  # type: ignore
 
 
 tts = load_model()

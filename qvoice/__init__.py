@@ -1,12 +1,9 @@
 import io
 from typing import Literal, TypeAlias
-
+import torch
 import aiofiles
-import numpy as np  # type: ignore
 import pytube  # pylint: disable=E0401  # type: ignore
-import scipy.io.wavfile as wavfile  # type: ignore
-from cachetools import (  # type: ignore # pylint: disable=import-error
-    LRUCache, cached)
+from cachetools import LRUCache, cached  # type: ignore # pylint: disable=import-error
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
@@ -17,11 +14,11 @@ from TTS.api import TTS  # type: ignore
 cache = LRUCache(maxsize=1)  # type: ignore
 Lang: TypeAlias = Literal["en", "es"]
 Gender: TypeAlias = Literal["female", "male"]
-
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"  # type: ignore
 
 @cached(cache)  # type: ignore
 def load_model():
-    return TTS("tts_models/multilingual/multi-dataset/xtts_v2").to("cuda")
+    return TTS("tts_models/multilingual/multi-dataset/xtts_v2").to(DEVICE)  # type: ignore
 
 
 tts = load_model()

@@ -1,9 +1,23 @@
 FROM python:3.11
-ENV PYTHONUNBUFFERED=1
-ENV PYTHONDONTWRITEBYTECODE=1
 WORKDIR /app
 COPY . .
-RUN apt-get update && apt-get install -y ffmpeg
+# install ffmpeg
+
+RUN apt-get update
+RUN apt-get install -y ffmpeg
+RUN apt-get install -y libsm6 libxext6
+RUN apt-get install -y libxrender-dev
+RUN apt-get install -y libgl1-mesa-glx
+
+# install python dependencies
+RUN pip install --upgrade pip
+RUN pip install spacy==3.1.3
+RUN python -m spacy download en_core_web_sm
+RUN python -m spacy download es_core_news_sm
+RUN pip install -r requirements.txt
+
+
+
 EXPOSE 8080
 RUN pip install -r requirements.txt
 EXPOSE 5000

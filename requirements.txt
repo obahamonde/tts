@@ -1,5 +1,5 @@
 TTS @ git+https://github.com/obahamonde/XTTS.git
-fastapi
+fastapi-slim
 pydub
 uvicorn
 pytube==12.1.3

@@ -13,7 +13,5 @@ RUN apt-get install -y libgl1-mesa-glx
 RUN pip install --upgrade pip
 RUN pip install spacy==3.1.3
 RUN pip install -r requirements.txt
-RUN pythom -m spacy download en_core_web_sm
-RUN python -m spacy download es_core_news_sm
 EXPOSE 5000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5000"]

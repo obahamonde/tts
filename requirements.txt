@@ -1,4 +1,4 @@
-TTS @ git+https://github.com/obahamonde/XTTS.git
+TTS
 fastapi
 pydub
 uvicorn
